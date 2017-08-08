@@ -1,0 +1,1 @@
+web: java -server -Dserver.port=$PORT -Dspring.profiles.active=heroku -Duser.timezone=UTC -jar target/media-store-0.0.1-SNAPSHOT.jar
