@@ -30,44 +30,7 @@ public class WelcomeController {
 	}
 
 	public String getCartStatement(Client client) {
-		int loyaltyPoints = 0;
-		
-		String statement = "Shopping history report for " + client.getName() + ":\n";
-		for (Rental rental : client.getRentals()) {
-			BigDecimal rentalPrice = new BigDecimal(0, new MathContext(2, RoundingMode.HALF_UP));;
-			String rentalStatement = "";
-			int loyaltyPointsBeforeCart = loyaltyPoints;
-			rentalStatement += "\n\t\u2022" + rental.getPurchiseDate() + " on date " + rental.getPurchiseDate() + ": \n";
-			
-				int loyaltyPointsBeforeItem = loyaltyPoints;
-				BigDecimal basePrice = rental.getProduct().getPrice();
-				BigDecimal cartItemPrice = basePrice.multiply(rental.getQuantity());
-				String daysRented = "";
-				
-					loyaltyPoints++;
-					if (rental.getQuantity().intValue() > 1 && rental.getProduct().getRentalFrequency() == NEW_RELEASE) {
-						loyaltyPoints++;
-					}
-					if (rental.getProduct().getRentalFrequency() == FrequesntReleasePoints.INFREQUENT_RENTAL) {
-						loyaltyPoints++;
-					}
-					if (rental.getQuantity().intValue() > 4 && rental.getProduct().getAgeAudience() == CHILDREN) {
-						loyaltyPoints = loyaltyPoints + 2;
-					}
-					
-				
-					
-				
-			
-			if (client.getCustomerCategory() == CustomerCategory.GOLD) {
-				loyaltyPoints = 0;
-			}
-			
-			
-		}
-		statement += "\t\u00bb You had accumulated " + loyaltyPoints + " loyalty points.\n";
-		statement += "\t\u00bb You are a " + " customer.\n";
-		return statement;
+		return "report for" + client.getName();
 	}
 
 }
