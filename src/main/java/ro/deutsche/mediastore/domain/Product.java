@@ -55,6 +55,10 @@ public class Product {
 		return rentalFrequency;
 	}
 
+	public ProductType getProductType() {
+		return productType;
+	}
+
 	public AgeAudiance getAgeAudience() {
 		return ageAudience;
 	}

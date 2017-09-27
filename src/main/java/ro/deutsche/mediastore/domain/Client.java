@@ -1,7 +1,8 @@
 package ro.deutsche.mediastore.domain;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -20,29 +21,29 @@ import javax.persistence.Table;
 @Table(name = "CLIENTS")
 @Access(AccessType.FIELD)
 public class Client {
-	
+
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String name;
-	
+
 	@Column(name = "CUSTOMER_CATEGORY")
 	@Enumerated(EnumType.STRING)
 	private CustomerCategory customerCategory;
-	
+
 	@Column(name = "CUSTOMER_BILLING_TYPE")
 	@Enumerated(EnumType.STRING)
 	private CustomerBillingType customerBillingType;
-	
+
 	@OneToMany
 	@JoinTable(
-      name="CLIENT_RENTAL",
-      joinColumns={ @JoinColumn(name="CLIENT_ID", referencedColumnName="ID") },
-      inverseJoinColumns={ @JoinColumn(name="RENTAL_ID", referencedColumnName="ID", unique=true) }
-  )
-	Set<Rental>rentals = new HashSet<Rental>();
+			name = "CLIENT_RENTAL",
+			joinColumns = {@JoinColumn(name = "CLIENT_ID", referencedColumnName = "ID")},
+			inverseJoinColumns = {@JoinColumn(name = "RENTAL_ID", referencedColumnName = "ID", unique = true)}
+	)
+	Set<Rental> rentals = new TreeSet<Rental>((Rental o1, Rental o2) -> o1.getPurchiseDate().compareTo(o2.getPurchiseDate()));
 
 	public String getName() {
 		return name;

@@ -33,38 +33,12 @@ public class Rental implements Comparable<Date> {
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product product;
 	
-	@OneToOne
-	@JoinColumn(name = "CLIENT_ID")
-	private Client client;
-	
 	@Column(name="quantity")
 	BigDecimal quantity; 
 	
-	@Override
-	public int hashCode() {
-		int hash = 3;
-		hash = 83 * hash + Objects.hashCode(this.purchiseDate);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Rental other = (Rental) obj;
-		if (!Objects.equals(this.purchiseDate, other.purchiseDate)) {
-			return false;
-		}
-		return true;
-	}
-
+	@Column(name="DAYS")
+	int days; 
+	
 	public Date getPurchiseDate() {
 		return purchiseDate;
 	}
@@ -85,17 +59,13 @@ public class Rental implements Comparable<Date> {
 		this.quantity = quantity;
 	}
 
+	public int getDays() {
+		return days;
+	}
+	
 	@Override
 	public int compareTo(Date o) {
 		return purchiseDate.compareTo(o);
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
 	}
 	
 }

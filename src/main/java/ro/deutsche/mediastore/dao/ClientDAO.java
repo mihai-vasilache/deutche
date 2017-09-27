@@ -1,5 +1,6 @@
 package ro.deutsche.mediastore.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,9 +13,9 @@ public class ClientDAO {
 	@PersistenceContext
 	protected EntityManager em;
 
-	public Client getSoleClient() {
-		Query q = em.createQuery("from Client c");
-		return (Client)q.getSingleResult();
+	public List<Client> getSoleClient() {
+		Query q = em.createQuery("select distinct c from Client c left join fetch c.rentals");
+		return (List<Client>)q.getResultList();
 		
 	}
 }
